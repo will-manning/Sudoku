@@ -36,73 +36,88 @@ public class Sudoku extends Activity implements OnClickListener{
     /**
      * {@inheritDoc}
      */
-	public void onClick(View v) {
-		switch(v.getId())
-		{
+	public final void onClick(final View v) {
+		switch(v.getId()) {
 		case R.id.about_button:
 			Intent intent = new Intent(this, About.class);
 			startActivity(intent);
 			break;
 		case R.id.new_button:
-			openNewgameDialog();
-			break;	
+			openNewGameDialog();
+			break;
 		case R.id.exit_button:
 			finish();
 			break;
+		default:
+			break;
 		}
-		
 	}
-	
-	private void openNewgameDialog()
-	{
+
+	/**.
+	 * opens the new game Dialog
+	 */
+	private void openNewGameDialog() {
 		/*
 		 * the set items takes the array of items and the
 		 * listener for an onclick
 		 */
 		new AlertDialog.Builder(this).setTitle(R.string.new_game_title)
-		.setItems(R.array.difficulty, new DialogInterface.OnClickListener() {
-			
+		.setItems(R.array.difficulty,
+				new DialogInterface.OnClickListener() {
+
 			/*
 			 * The action to perform when an item is clicked
 			 * (non-Javadoc)
-			 * @see android.content.DialogInterface.OnClickListener#onClick
+			 * @see android.content.DialogInterface
+			 * .OnClickListener#onClick
 			 * (android.content.DialogInterface, int)
 			 */
-			public void onClick(DialogInterface dialog, int which) {
-			 startGame(which);				
+			public void onClick(final DialogInterface dialog,
+					final int which) {
+			 startGame(which);
 			}
-			
+
 		}).show();
-		
+
 	}
-	
-	private void startGame(int i)
-	{
-		Log.d(TAG, "clicked on " +i);
+
+	/**.
+	 * start the game
+	 *
+	 * @param difficulty the difficulty selected when starting the game
+	 */
+	private void startGame(final int difficulty) {
+		Log.d(TAG, "clicked on " + difficulty);
+		//create an intent to fire up the activity
+		Intent intent = new Intent(this, Game.class);
+		intent.putExtra(Game.KEY_DIFFICULTY, difficulty);
+		startActivity(intent);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu){
+	public final boolean onCreateOptionsMenu(final Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
-		return true;		
+		return true;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public final boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.settings:
 			startActivity(new Intent(this, Prefs.class));
 			return true;
+		default:
+			break;
 		}
 		return false;
 	}
-	
+
 }

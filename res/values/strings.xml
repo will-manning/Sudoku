@@ -24,5 +24,11 @@ nine exactly once</string>
     <string name="new_game_title">Difficulty</string>
     <string name="easy_label">Easy</string>
     <string name="medium_label">Medium</string>
-    <string name="hard_label">Hard</string>    
+    <string name="hard_label">Hard</string>
+    
+    <!-- game strings -->
+    <string name="game_title">Game</string>
+    <string name="no_moves_label">No moves</string>
+    <string name="keypad_title">Keypad</string>
+    <!-- end game strings -->    
 </resources>
