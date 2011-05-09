@@ -38,8 +38,5 @@
 		            android:text="@string/exit_label" />
             </TableRow>            
         </TableLayout>
-		
-		
-
 	</LinearLayout>
 </LinearLayout>

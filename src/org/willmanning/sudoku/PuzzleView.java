@@ -35,12 +35,27 @@ public class PuzzleView extends View {
 	 * the width of a square
 	 */
 	private float width;
+	
 	/**.
 	 * the height of a square
 	 */
 	private float height;
+	
+	/**
+	 * hold on to the current selected
+	 * tile's x position
+	 */
 	private int selX;
+	
+	/**
+	 * hold on to the current selected 
+	 * tile's y position
+	 */
 	private int selY;
+	
+	/**
+	 * The current selected Rectangle
+	 */
 	private final Rect selRect = new Rect();
 
 	public PuzzleView(Context context)
@@ -169,65 +184,65 @@ public class PuzzleView extends View {
 		canvas.drawRect(selRect, selected);		
 	}
 	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		Log.d(TAG, "onKeyDown; keycode=" + keyCode + ", event=" + event);
-
-		switch (keyCode) {
-		case KeyEvent.KEYCODE_DPAD_UP:
-			select(selX, selY - 1);
-			break;
-		case KeyEvent.KEYCODE_DPAD_DOWN:
-			select(selX, selY + 1);
-			break;
-		case KeyEvent.KEYCODE_DPAD_LEFT:
-			select(selX - 1, selY);
-			break;
-		case KeyEvent.KEYCODE_DPAD_RIGHT:
-			select(selX = 1, selY);
-			break;
-			
-		case KeyEvent.KEYCODE_0:
-		case KeyEvent.KEYCODE_SPACE:
-			setSelectedTile(0);
-			break;
-		case KeyEvent.KEYCODE_1:
-			setSelectedTile(1);
-			break;
-		case KeyEvent.KEYCODE_2:
-			setSelectedTile(2);
-			break;
-		case KeyEvent.KEYCODE_3:
-			setSelectedTile(3);
-			break;
-		case KeyEvent.KEYCODE_4:
-			setSelectedTile(4);
-			break;
-		case KeyEvent.KEYCODE_5:
-			setSelectedTile(5);
-			break;
-		case KeyEvent.KEYCODE_6:
-			setSelectedTile(6);
-			break;
-		case KeyEvent.KEYCODE_7:
-			setSelectedTile(7);
-			break;
-		case KeyEvent.KEYCODE_8:
-			setSelectedTile(8);
-			break;
-		case KeyEvent.KEYCODE_9:
-			setSelectedTile(9);
-			break;
-		case KeyEvent.KEYCODE_ENTER:
-		case KeyEvent.KEYCODE_DPAD_CENTER:
-			game.showKeypadOrError(selX, selY);
-			break;
-
-		default:
-			return super.onKeyDown(keyCode, event);			
-		}
-		return true;
-	}
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		Log.d(TAG, "onKeyDown; keycode=" + keyCode + ", event=" + event);
+//
+//		switch (keyCode) {
+//		case KeyEvent.KEYCODE_DPAD_UP:
+//			select(selX, selY - 1);
+//			break;
+//		case KeyEvent.KEYCODE_DPAD_DOWN:
+//			select(selX, selY + 1);
+//			break;
+//		case KeyEvent.KEYCODE_DPAD_LEFT:
+//			select(selX - 1, selY);
+//			break;
+//		case KeyEvent.KEYCODE_DPAD_RIGHT:
+//			select(selX = 1, selY);
+//			break;
+//			
+//		case KeyEvent.KEYCODE_0:
+//		case KeyEvent.KEYCODE_SPACE:
+//			setSelectedTile(0);
+//			break;
+//		case KeyEvent.KEYCODE_1:
+//			setSelectedTile(1);
+//			break;
+//		case KeyEvent.KEYCODE_2:
+//			setSelectedTile(2);
+//			break;
+//		case KeyEvent.KEYCODE_3:
+//			setSelectedTile(3);
+//			break;
+//		case KeyEvent.KEYCODE_4:
+//			setSelectedTile(4);
+//			break;
+//		case KeyEvent.KEYCODE_5:
+//			setSelectedTile(5);
+//			break;
+//		case KeyEvent.KEYCODE_6:
+//			setSelectedTile(6);
+//			break;
+//		case KeyEvent.KEYCODE_7:
+//			setSelectedTile(7);
+//			break;
+//		case KeyEvent.KEYCODE_8:
+//			setSelectedTile(8);
+//			break;
+//		case KeyEvent.KEYCODE_9:
+//			setSelectedTile(9);
+//			break;
+//		case KeyEvent.KEYCODE_ENTER:
+//		case KeyEvent.KEYCODE_DPAD_CENTER:
+//			game.showKeypadOrError(selX, selY);
+//			break;
+//
+//		default:
+//			return super.onKeyDown(keyCode, event);			
+//		}
+//		return true;
+//	}
 	
 	private void select(int x, int y)
 	{
@@ -238,30 +253,23 @@ public class PuzzleView extends View {
 		invalidate(selRect);
 	}
 	
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		if (event.getAction() != MotionEvent.ACTION_DOWN)
-			return super.onTouchEvent(event);
+	public void setSelectedTile()
+	{
 		
-		select((int) (event.getX() / width),
-				(int) (event.getY() / height));
-		
-		game.showKeypadOrError(selX, selY);
-		
-		Log.d(TAG, "onTouchEvent; x=" + selX + ", y=" + selY);		
-		
-		return true;
 	}
 	
-	public void setSelectedTile(int tile)
-	{
-		if(game.setTileIfValid(selX, selY, tile)) {
-			invalidate();
-		} else {
-			Log.d(TAG, "setSelectedTile: invalid: " + tile);
-		}
-		
-	}
+//	/**
+//	 * Check if the passed value is valid for
+//	 * the selected tile
+//	 * 
+//	 * @param x
+//	 * @param y
+//	 * @param value
+//	 * @return
+//	 */
+//	protected boolean setTileIfValid(int x, int y, int value){
+//		
+//	}
 
 
 }
