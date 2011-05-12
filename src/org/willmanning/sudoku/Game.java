@@ -333,6 +333,33 @@ public class Game extends Activity {
 			}
 		}
 	}
+	
+	
+	/**
+	 * 
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	protected void showKeypadOrError(int x, int y)
+	{
+		int[] usedNumbers = getUsedTiles(x, y);
+		
+		//if all numbers are used then this tile 
+		//can't select a number
+		if (usedNumbers.length == 9)
+		{
+			Toast toast = Toast.makeText(this, 
+					R.string.no_moves_label, 
+					Toast.LENGTH_SHORT);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+		} else {
+			//else show the keypad
+			Dialog dialog =  new Keypad(this, usedNumbers,
+					puzzleView);
+			dialog.show();
 
-
+		}
+	}
 }

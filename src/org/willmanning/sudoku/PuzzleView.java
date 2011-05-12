@@ -203,8 +203,7 @@ public class PuzzleView extends View {
 		/*
 		 * nine by nine grid
 		 */
-		for(int i = 0; i < 9; i++)
-		{
+		for(int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++)
 				canvas.drawText(this.game.getTileString(i, j),
 						i * width + x, j * height + y,
@@ -265,11 +264,13 @@ public class PuzzleView extends View {
 						movesLeft > 0) {
 
 					getRect(i, j, rect);
+
 					//paint it the right colour
-					hint.setColor(hintColours[movesLeft - 1]);
-					
+					hint
+					.setColor(hintColours[movesLeft - 1]);
+
 					Log.d(TAG, "movesLeft " + movesLeft);
-					
+
 					canvas.drawRect(rect, hint);
 				}
 			}
@@ -349,7 +350,28 @@ public class PuzzleView extends View {
 			return super.onKeyDown(keyCode, event);
 		}
 		return true;
-	}	
+	}
+	
+	/**.
+	 * show a custom keypad if the user touches a tile
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final boolean onTouchEvent(MotionEvent event) {
+		//if teh event isn't an action down call super
+		if (event.getAction() != MotionEvent.ACTION_DOWN) {
+			return super.onTouchEvent(event);
+		}
+
+		//select the touched tile
+		select((int) (event.getX() / width),
+				(int) (event.getY() / height));
+
+		//show the keypad
+		game.showKeypadOrError(selX, selY);
+
+		return true;
+	}
 
 	/**.
 	 * set the tile as selected by changing the color
